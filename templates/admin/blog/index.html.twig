@@ -21,6 +21,7 @@
                 <h5 class="card-title">{{ blog.title }}</h5>
                 <p class="card-text">{{ blog.body }}</p>
 
+
                 <div class="button-group">
                     <a class="btn btn-danger" href="{{ path('admin_blog_delete', {'id': blog.id}) }}">Sil</a>
                     <a class="btn btn-info" href="{{ path('admin_blog_update', {'id': blog.id}) }}">Guncelle</a>
