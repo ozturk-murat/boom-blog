@@ -1,0 +1,35 @@
+{% extends "admin/base.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <nav class="nav nav-underline" style="background: #10101010">
+        <a class="nav-link" href="{{ path('admin_blog_add') }}">Blog Ekle</a>
+    </nav>
+
+    {% for blog in blogs%}
+        <div class="card mt-5">
+            <div class="card-header">
+                {{ blog.category.title }}
+                <u>
+                    <a href="{{ path('app_admin_blog_waitcomments', {'blogId': blog.id}) }}" class="text-right text-muted font-weight-lighter">
+                        {% if waitComments[blog.id] is defined %}
+                            ({{ waitComments[blog.id]}} comments waiting for approve By Admin)
+                        {% endif %}
+                    </a>
+                </u>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <p class="card-text">{{ blog.body }}</p>
+
+                <div class="button-group">
+                    <a class="btn btn-danger" href="{{ path('admin_blog_delete', {'id': blog.id}) }}">Sil</a>
+                    <a class="btn btn-info" href="{{ path('admin_blog_update', {'id': blog.id}) }}">Guncelle</a>
+                </div>
+
+
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

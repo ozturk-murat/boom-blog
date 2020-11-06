@@ -1,0 +1,28 @@
+{% extends "admin/base.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Comments Approve/Decline Panel</h6>
+    {% for comment in comments%}
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="media text-muted pt-3">
+                        <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt=""  class="mr-2 rounded" style="width: 32px; height: 32px;"
+                             src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Solid_red.png">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class="d-block text-gray-dark">{{ comment.user.username }}</strong>
+                            {{ comment.body }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                    <a href="{{ path('app_admin_blog_approvecomment', {'commentId': comment.id}) }}" class="btn btn-outline-primary text-dark mr-2">Approve</a>
+                    <a href="{{ path('app_admin_blog_declinecomment', {'commentId': comment.id}) }}" class="btn btn-outline-danger">Decline</a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

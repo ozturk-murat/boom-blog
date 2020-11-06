@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% include "admin/header.html.twig" %}
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+</body>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/pooper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+</html>

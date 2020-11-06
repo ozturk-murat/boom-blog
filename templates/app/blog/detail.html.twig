@@ -1,0 +1,102 @@
+{% extends 'app/base.html.twig' %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-12 col-md-8 border-left">
+            <h1 class="card-title">"{{ blog.title }}"</h1>
+            <img class="card-img-top" src="{{ blog.image }}" alt="Card image cap"/>
+            <p class="card-text-one">{{ blog.body }}</p>
+            <p class="card-tags pb-5">
+                {% set tags = blog.tags|split(',') %}
+                {% for tag in tags %}
+                    <button class="btn btn-sm btn-warning">
+                        #{{ tag }}
+                    </button>
+                {% endfor %}
+            </p>
+
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+                <h3 class="border-bottom border-gray pb-3 mb-3">Comments</h3>
+
+                <form action="{{ path('app_app_blog_addcomment', {'blogId': blog.id}) }}" method="post">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-text"></span>
+                            </div>
+                            <textarea class="form-control mb-3" name="body" aria-label="With textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-large btn-block btn-warning">Share</button>
+                    </div>
+
+                    <div class="col-12 border-bottom border-gray mt-3">
+
+                    </div>
+                </form>
+
+                {% for comment in comments%}
+                    <div class="media text-muted pt-3">
+                        <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt=""  class="mr-2 rounded" style="width: 32px; height: 32px;"
+                             src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Solid_red.png">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class="d-block text-gray-dark">{{ comment.user.username }}</strong>
+                            {{ comment.body }}
+                        </p>
+                    </div>
+                {% endfor %}
+
+
+                <small class="d-block text-right mt-3">
+                    <a href="#">All comments(23)</a>
+                </small>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 position-sticky">
+            <a><h4>&nbsp;SON BLOG YAZILARI</h4></a>
+            {% for blogSecond in blogSeconds|slice(2, 5) %}
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start mt-3">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ blogSecond.title }}</h5>
+                    </div>
+                    <p class="mb-1">{{ blogSecond.body|slice(0, 25) }}...</p>
+                    <small class="text-muted">Devamı için tıklayınız...</small>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <style>
+
+        .card {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-title {
+            font-size: 36px;
+            height: auto;
+            width: 100%;
+            padding-top: 30px;
+        }
+
+
+        .card-text-one {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .col-6 {
+            margin-top: 40px;
+        }
+    </style>
+
+
+
+{% endblock %}

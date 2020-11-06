@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-warning" style="border-bottom: solid #10101010 0.5px;">
+    <a class="navbar-brand" href="{{ path('index') }}">Boom</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('blog') }}">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('contact') }}">Contacts</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+                {% if user is defined %}
+                    <a href="{{ path('admin_index') }}">
+                        {{ user.username }}
+                    </a>
+                {% else %}
+                    <button type="button" class="btn btn-dark text-light" data-toggle="modal" data-target="#exampleModal">
+                        Login / Sign Up
+                    </button>
+
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              <form action="">
+                                  <div class="col-12">
+                                      <div class="form-group">
+                                          <label for="login_email">Email</label>
+                                          <input id="login_email" type="email" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="col-12">
+                                       <div class="form-group">
+                                           <label>Email</label>
+                                           <input type="password" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="col-12">
+                                      <button type="submit" class="btn btn-large btn-block btn-primary">Login</button>
+                                  </div>
+                              </form>
+
+                              <div class="modal-header mt-3 mb-3">
+                                <h5 class="modal-title" id="exampleModalLabel">Sing Up</h5>
+                              </div>
+
+                              <form action="">
+                                  <div class="col-12">
+                                      <label for="sign_in_fn">First Name</label>
+                                      <input type="text" class="form-control" id="sign_in_fn">
+                                  </div>
+                                  <div class="col-12">
+                                      <label for="sign_in_ln">Last Name</label>
+                                      <input type="text" class="form-control" id="sign_in_ln"></div>
+                                  <div class="col-12">
+                                      <label for="sign_in_un">Username</label>
+                                      <input type="text" class="form-control" id="sign_in_un"></div>
+                                  <div class="col-12">
+                                      <label for="sign_in_name">Name</label>
+                                      <input type="text" class="form-control" id="sign_in_name">
+                                  </div>
+                                  <div class="col-12">
+                                      <label for="sign_in_pf">Password</label>
+                                      <input type="password" class="form-control" id="sign_in_pf">
+                                  </div>
+                                  <div class="col-12">
+                                      <label for="sign_in_ps">Re Password</label>
+                                      <input type="text" class="form-control" id="sign_in_ps">
+                                  </div>
+                                  <div class="col-12">
+                                      <button type="submit" class="btn btn-large btn-block btn-success mt-3">Sign Up</button>
+                                  </div>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                {% endif %}
+    </span>
+    </div>
+</nav>
+

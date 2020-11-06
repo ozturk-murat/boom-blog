@@ -1,0 +1,38 @@
+{% extends 'app/base.html.twig' %}
+{% block body %}
+
+    <div class="row py-3">
+        {% for blog in blogs%}
+        <div class="col-3 mt-3">
+            <div class="card-deck ">
+                <div class="card">
+                    <div class="card-image" style="background-image: url({{ blog.image }})">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">"{{ blog.title }}"</h5>
+                        <p class="card-text">{{ blog.body|slice(0, 25) }}...</p>
+                        <a class="btn btn-info btn-warning" href="{{ path('app_app_blog_detail', {'id': blog.id}) }}">Devamı</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <style>
+        .card .card-image {
+            height: 200px;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .card .card-body .card-title {
+            height: 60px;
+        }
+
+
+    </style>
+
+{% endblock %}
