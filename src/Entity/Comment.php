@@ -24,8 +24,7 @@ class Comment
     private $blog;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Column(name="user_id", type="integer")
      */
     private $user;
 
