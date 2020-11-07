@@ -4,8 +4,8 @@ namespace App\Controller\App;
 
 use App\Entity\Comment;
 use App\Repository\BlogRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,7 +67,6 @@ class BlogController extends AbstractController
      */
     public function addComment(Request $request, $blogId, BlogRepository $blogRepository, UserRepository $userRepository)
     {
-
         $user = $userRepository->find(1);
         $blog = $blogRepository->find($blogId);
 

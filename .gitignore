@@ -11,8 +11,8 @@
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
-composer.lock
-symfony.lock
+.composer.lock
+.symfony.lock
 .phpunit
 .phpunit.result.cache
 /phpunit.xml

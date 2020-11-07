@@ -6,6 +6,7 @@ use App\Entity\Blog;
 use App\Repository\BlogRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -50,17 +51,17 @@ class BlogController extends AbstractController
     /**
      * @Route("/add", name="admin_blog_add")
      * @Template()
-     * @param CategoryRepository $categoryRepository
      * @param Request $request
+     * @param CategoryRepository $categoryRepository
+     * @param UserRepository $userRepository
      * @return string[]
      */
-    public function add(Request $request, CategoryRepository $categoryRepository)
+    public function add(Request $request, CategoryRepository $categoryRepository, UserRepository $userRepository)
     {
         if ($request->isMethod('POST')) {
             $em =  $this->getDoctrine()->getManager();
 
-//            $author = $userRepository->find(1);
-            $author = 1;
+            $author = $this->getUser();
             $category = $categoryRepository->findOneBy(['id' => $request->get('category')]);
 
             $blog = new Blog();
