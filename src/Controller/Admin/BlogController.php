@@ -6,8 +6,6 @@ use App\Entity\Blog;
 use App\Repository\BlogRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
-use App\Repository\UserRepository;
-use phpDocumentor\Reflection\Types\This;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -53,16 +51,16 @@ class BlogController extends AbstractController
      * @Route("/add", name="admin_blog_add")
      * @Template()
      * @param CategoryRepository $categoryRepository
-     * @param UserRepository $userRepository
      * @param Request $request
      * @return string[]
      */
-    public function add(Request $request, CategoryRepository $categoryRepository, UserRepository $userRepository)
+    public function add(Request $request, CategoryRepository $categoryRepository)
     {
         if ($request->isMethod('POST')) {
             $em =  $this->getDoctrine()->getManager();
 
-            $author = $userRepository->find(1);
+//            $author = $userRepository->find(1);
+            $author = 1;
             $category = $categoryRepository->findOneBy(['id' => $request->get('category')]);
 
             $blog = new Blog();
@@ -186,7 +184,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/comment/{commentId}/decline")
      * @param $commentId
+     * @param CommentRepository $commentRepository
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function declineComment($commentId, CommentRepository $commentRepository)
     {
