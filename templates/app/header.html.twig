@@ -17,6 +17,7 @@
             </li>
         </ul>
         <span class="navbar-text">
+            {{ is_granted('ROLE_USER') }}
                 {% if user is defined %}
                     <a href="{{ path('admin_index') }}">
                         {{ user.username }}
@@ -38,19 +39,20 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                              <form action="">
+                              <form action="{{ path('app_login') }}" method="post">
                                   <div class="col-12">
                                       <div class="form-group">
                                           <label for="login_email">Email</label>
-                                          <input id="login_email" type="email" class="form-control">
+                                          <input id="login_email" type="text" class="form-control" name="username">
                                       </div>
                                   </div>
                                   <div class="col-12">
                                        <div class="form-group">
-                                           <label>Email</label>
-                                           <input type="password" class="form-control">
+                                           <label>Password</label>
+                                           <input type="password" class="form-control" name="password">
                                       </div>
                                   </div>
+                                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                   <div class="col-12">
                                       <button type="submit" class="btn btn-large btn-block btn-primary">Login</button>
                                   </div>
