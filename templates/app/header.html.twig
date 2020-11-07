@@ -15,85 +15,88 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('contact') }}">Contacts</a>
             </li>
+            {%if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_index') }}">Yönetim</a>
+                </li>
+            {% endif %}
         </ul>
         <span class="navbar-text">
-            {{ is_granted('ROLE_USER') }}
-                {% if user is defined %}
-                    <a href="{{ path('admin_index') }}">
-                        {{ user.username }}
-                    </a>
-                {% else %}
-                    <button type="button" class="btn btn-dark text-light" data-toggle="modal" data-target="#exampleModal">
-                        Login / Sign Up
-                    </button>
+            {% if is_granted('ROLE_USER') %}
+                <span>{{ app.user.username }}</span>
+                <a href="{{ path('app_logout') }}" class="text-danger">Logout</a>
+            {% else %}
+                <button type="button" class="btn btn-dark text-light" data-toggle="modal" data-target="#exampleModal">
+                    Login / Sign Up
+                </button>
 
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                              <form action="{{ path('app_login') }}" method="post">
-                                  <div class="col-12">
-                                      <div class="form-group">
-                                          <label for="login_email">Email</label>
-                                          <input id="login_email" type="text" class="form-control" name="username">
-                                      </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="{{ path('app_login') }}" method="post">
+                              <div class="col-12">
+                                  <div class="form-group">
+                                      <label for="login_email">Email</label>
+                                      <input id="login_email" type="text" class="form-control" name="username">
                                   </div>
-                                  <div class="col-12">
-                                       <div class="form-group">
-                                           <label>Password</label>
-                                           <input type="password" class="form-control" name="password">
-                                      </div>
-                                  </div>
-                                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                  <div class="col-12">
-                                      <button type="submit" class="btn btn-large btn-block btn-primary">Login</button>
-                                  </div>
-                              </form>
-
-                              <div class="modal-header mt-3 mb-3">
-                                <h5 class="modal-title" id="exampleModalLabel">Sing Up</h5>
                               </div>
+                              <div class="col-12">
+                                   <div class="form-group">
+                                       <label>Password</label>
+                                       <input type="password" class="form-control" name="password">
+                                  </div>
+                              </div>
+                              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                              <div class="col-12">
+                                  <button type="submit" class="btn btn-large btn-block btn-primary">Login</button>
+                              </div>
+                          </form>
 
-                              <form action="">
-                                  <div class="col-12">
-                                      <label for="sign_in_fn">First Name</label>
-                                      <input type="text" class="form-control" id="sign_in_fn">
-                                  </div>
-                                  <div class="col-12">
-                                      <label for="sign_in_ln">Last Name</label>
-                                      <input type="text" class="form-control" id="sign_in_ln"></div>
-                                  <div class="col-12">
-                                      <label for="sign_in_un">Username</label>
-                                      <input type="text" class="form-control" id="sign_in_un"></div>
-                                  <div class="col-12">
-                                      <label for="sign_in_name">Name</label>
-                                      <input type="text" class="form-control" id="sign_in_name">
-                                  </div>
-                                  <div class="col-12">
-                                      <label for="sign_in_pf">Password</label>
-                                      <input type="password" class="form-control" id="sign_in_pf">
-                                  </div>
-                                  <div class="col-12">
-                                      <label for="sign_in_ps">Re Password</label>
-                                      <input type="text" class="form-control" id="sign_in_ps">
-                                  </div>
-                                  <div class="col-12">
-                                      <button type="submit" class="btn btn-large btn-block btn-success mt-3">Sign Up</button>
-                                  </div>
-                              </form>
+                          <div class="modal-header mt-3 mb-3">
+                            <h5 class="modal-title" id="exampleModalLabel">Sing Up</h5>
                           </div>
-                        </div>
+
+                          <form action="">
+                              <div class="col-12">
+                                  <label for="sign_in_fn">First Name</label>
+                                  <input type="text" class="form-control" id="sign_in_fn">
+                              </div>
+                              <div class="col-12">
+                                  <label for="sign_in_ln">Last Name</label>
+                                  <input type="text" class="form-control" id="sign_in_ln"></div>
+                              <div class="col-12">
+                                  <label for="sign_in_un">Username</label>
+                                  <input type="text" class="form-control" id="sign_in_un"></div>
+                              <div class="col-12">
+                                  <label for="sign_in_name">Name</label>
+                                  <input type="text" class="form-control" id="sign_in_name">
+                              </div>
+                              <div class="col-12">
+                                  <label for="sign_in_pf">Password</label>
+                                  <input type="password" class="form-control" id="sign_in_pf">
+                              </div>
+                              <div class="col-12">
+                                  <label for="sign_in_ps">Re Password</label>
+                                  <input type="text" class="form-control" id="sign_in_ps">
+                              </div>
+                              <div class="col-12">
+                                  <button type="submit" class="btn btn-large btn-block btn-success mt-3">Sign Up</button>
+                              </div>
+                          </form>
                       </div>
                     </div>
-                {% endif %}
+                  </div>
+                </div>
+            {% endif %}
     </span>
     </div>
 </nav>
